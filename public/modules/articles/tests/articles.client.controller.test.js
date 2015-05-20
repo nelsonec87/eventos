@@ -2,7 +2,7 @@
 
 (function() {
 	// Articles Controller Spec
-	describe('Articles Controller Tests', function() {
+	describe('ArticlesController', function() {
 		// Initialize global variables
 		var ArticlesController,
 			scope,
@@ -122,7 +122,7 @@
 			expect(scope.content).toEqual('');
 
 			// Test URL redirection after the article was created
-			expect($location.path()).toBe('/articles/' + sampleArticleResponse._id);
+			expect($location.path()).toBe('/articles/' + sampleArticleResponse.id);
 		}));
 
 		it('$scope.update() should update a valid article', inject(function(Articles) {
@@ -144,7 +144,7 @@
 			$httpBackend.flush();
 
 			// Test URL location to new object
-			expect($location.path()).toBe('/articles/' + sampleArticlePutData._id);
+			expect($location.path()).toBe('/articles/' + sampleArticlePutData.id);
 		}));
 
 		it('$scope.remove() should send a DELETE request with a valid articleId and remove the article from the scope', inject(function(Articles) {

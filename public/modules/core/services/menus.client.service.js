@@ -79,7 +79,8 @@ angular.module('core').service('Menus', [
 		};
 
 		// Add menu item object
-		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemType, menuItemUIRoute, isPublic, roles, position) {
+		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemType, menuItemUIRoute, isPublic, roles, position,
+																iconClass, translateKey, alert) {
 			// Validate that the menu exists
 			this.validateMenuExistance(menuId);
 
@@ -94,7 +95,10 @@ angular.module('core').service('Menus', [
 				roles: ((roles === null || typeof roles === 'undefined') ? this.menus[menuId].roles : roles),
 				position: position || 0,
 				items: [],
-				shouldRender: shouldRender
+				shouldRender: shouldRender,
+				iconClass: iconClass || 'fa fa-file-o',
+				translate: translateKey,
+				alert: alert
 			});
 
 			// Return the menu object
@@ -162,5 +166,7 @@ angular.module('core').service('Menus', [
 
 		//Adding the topbar menu
 		this.addMenu('topbar');
+		//Adding the sidebar menu
+		this.addMenu('sidebar');
 	}
 ]);

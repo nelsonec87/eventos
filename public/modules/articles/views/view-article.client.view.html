@@ -1,19 +1,19 @@
-<section data-ng-controller="ArticlesController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1 data-ng-bind="article.title"></h1>
-	</div>
+<h3>
 	<div class="pull-right" data-ng-show="authentication.user.id == article.UserId">
 		<a class="btn btn-primary" href="/#!/articles/{{article.id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
+			<i class="fa fa-edit"></i>
 		</a>
 		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
+			<i class="fa fa-trash"></i>
 		</a>
 	</div>
+	{{article.title}}
+</h3>
+<section data-ng-init="findOne()">
 	<small>
 		<em class="text-muted">
 			Posted on
-			<span data-ng-bind="article.createdAt | date:'mediumDate'"></span>
+			<span data-ng-bind="article.created | date:'mediumDate'"></span>
 			by
 			<span data-ng-bind="article.User.displayName"></span>
 		</em>
