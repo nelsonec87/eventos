@@ -22,7 +22,7 @@ module.exports = function() {
 	// Deserialize sessions
 	passport.deserializeUser(function(id, done) {
 		console.log('oi1');
-		User.find(id).then(function(user) {
+		User.findById(id).then(function(user) {
 			
 			done(null, user);
 		});

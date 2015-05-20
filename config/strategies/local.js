@@ -17,7 +17,7 @@ module.exports = function () {
 	},
 		function (username, password, done) {
 			User.findOne({
-				username: username
+				where: {username: username}
 			}).then(function (user) {
 					if (!user) {
 						return done(null, false, {
