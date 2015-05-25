@@ -27,6 +27,15 @@ Object.keys(db).forEach(function (modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-sequelize.sync({force: true});
+sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
+.then(function(){
+    return sequelize.sync({ force: true }).catch(function(err){
+        if(err)
+            console.error('Could not connect to MySQL!', err);
+    });
+})
+.then(function(){
+    sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
+});
 
 module.exports = db;
