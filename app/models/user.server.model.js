@@ -37,7 +37,6 @@ var validateRoles = function (roles) {
  */
 var jsonGet = function (property) {
 	return function () {
-		console.log(this);
 		var val = this.getDataValue(property);
 		if (val !== "" && val !== undefined)
 			return JSON.parse(this.getDataValue(property));
