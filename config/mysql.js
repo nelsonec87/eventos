@@ -6,7 +6,16 @@ var Sequelize = require('sequelize'),
 
 var db = {};
 
-var sequelize = new Sequelize(config.db.db, config.db.user, config.db.pass, { logging: false, host: config.db.host, "dialect": "mysql" });
+var myCfg = { 
+    host: config.db.host, 
+    dialect: "mysql" 
+};
+
+if (process.env.NODE_ENV === 'production') {
+    myCfg.logging = false;
+}
+
+var sequelize = new Sequelize(config.db.db, config.db.user, config.db.pass, myCfg);
 
 fs
 	.readdirSync(__dirname + '/../app/models')

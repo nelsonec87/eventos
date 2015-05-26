@@ -72,7 +72,8 @@ module.exports = function (db) {
 	app.set('views', './app/views');
 
 	// Enable logger (morgan)
-	//app.use(morgan(logger.getLogFormat(), logger.getLogOptions()));
+    if (process.env.NODE_ENV !== 'production') 
+	   app.use(morgan(logger.getLogFormat(), logger.getLogOptions()));
 
 	// Environment dependent middleware
 	if (process.env.NODE_ENV === 'development') {
