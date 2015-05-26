@@ -6,7 +6,7 @@ var Sequelize = require('sequelize'),
 
 var db = {};
 
-var sequelize = new Sequelize(config.db.db, config.db.user, config.db.pass, {host: config.db.host, "dialect": "mysql" });
+var sequelize = new Sequelize(config.db.db, config.db.user, config.db.pass, { logging: false, host: config.db.host, "dialect": "mysql" });
 
 fs
 	.readdirSync(__dirname + '/../app/models')
@@ -29,7 +29,7 @@ db.Sequelize = Sequelize;
 
 sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
 .then(function(){
-    return sequelize.sync({ force: true }).catch(function(err){
+    return sequelize.sync(/*{ force: true }*/).catch(function(err){
         if(err)
             console.error('Could not connect to MySQL!', err);
     });
