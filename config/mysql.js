@@ -6,9 +6,9 @@ var Sequelize = require('sequelize'),
 
 var db = {};
 
-var myCfg = { 
-    host: config.db.host, 
-    dialect: "mysql" 
+var myCfg = {
+    host: config.db.host,
+    dialect: "mysql"
 };
 
 if (process.env.NODE_ENV === 'production') {
@@ -20,7 +20,7 @@ var sequelize = new Sequelize(config.db.db, config.db.user, config.db.pass, myCf
 fs
 	.readdirSync(__dirname + '/../app/models')
 	.filter(function (file) {
-	return (file.indexOf(".") !== 0) && (file !== "index.js");
+	return (!! ~file.indexOf('.server.model.js'));
 })
 	.forEach(function (file) {
 	var model = sequelize["import"](path.join(__dirname + '/../app/models', file));
@@ -37,13 +37,13 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
-.then(function(){
-    return sequelize.sync(/*{ force: true }*/).catch(function(err){
-        if(err)
+	.then(function () {
+    return sequelize.sync(/*{ force: true }*/).catch(function (err) {
+        if (err)
             console.error('Could not connect to MySQL!', err);
     });
 })
-.then(function(){
+	.then(function () {
     sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
 });
 
